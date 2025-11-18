@@ -11,6 +11,8 @@ interface Props {
 function GenresList({ selectedGenre, onSelectGenre }: Props) {
   const { data: genres, error } = useGenres();
 
+  if (error) return null;
+
   return (
     <>
       <Heading as="h2" mb={2}>

@@ -7,7 +7,7 @@ interface Props {}
 
 function NavBar() {
   return (
-    <HStack justify="space-between" pr={3}>
+    <HStack justify="space-between">
       <Image src={logo} boxSize={{ base: "50px", md: "60px" }} />
       <SearchInput />
       <ColorModeSwitch />

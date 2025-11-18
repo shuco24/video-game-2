@@ -1,5 +1,5 @@
-import { Grid, GridItem, HStack, Image, Switch, Text } from "@chakra-ui/react";
-import { ColorModeSwitch, NavBar } from "./components";
+import { Grid, GridItem, Heading, VStack } from "@chakra-ui/react";
+import { GameGrid, NavBar } from "./components";
 import GenresList from "./components/GenreList";
 import { useState } from "react";
 import type GameQuery from "./store/GameQuery";
@@ -16,17 +16,17 @@ function App() {
              "nav main"`,
       }}
       gridTemplateRows="auto 1fr"
-      gridTemplateColumns={{ base: "1fr", md: "200px 1fr" }}
+      gridTemplateColumns={{ base: "1fr", md: "180px 1fr" }}
       minHeight="100vh"
       paddingX={4}
     >
       {/* HEADER */}
-      <GridItem area="header">
+      <GridItem area="header" mb={4}>
         <NavBar />
       </GridItem>
 
       {/* SIDEBAR */}
-      <GridItem area="nav" pt={4} display={{ base: "none", md: "block" }}>
+      <GridItem area="nav" mt={2} display={{ base: "none", md: "block" }}>
         <GenresList
           selectedGenre={gameQuery.genre}
           onSelectGenre={(genre) =>
@@ -36,8 +36,13 @@ function App() {
       </GridItem>
 
       {/* MAIN CONTENT */}
-      <GridItem area="main" backgroundColor="red">
-        main
+      <GridItem area="main">
+        <VStack align="start">
+          <Heading fontSize="4xl" textAlign="left" as="h2">{`${
+            gameQuery.genre?.name || ""
+          } ${gameQuery.platform?.name || ""} Games`}</Heading>
+          <GameGrid gameQuery={gameQuery}></GameGrid>
+        </VStack>
       </GridItem>
     </Grid>
   );

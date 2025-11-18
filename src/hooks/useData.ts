@@ -2,7 +2,8 @@ import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 
 function useData<T>(
-  getData: () => { request: Promise<T[]>; cancel: () => void }
+  getData: () => { request: Promise<T[]>; cancel: () => void },
+  deps: any[] = []
 ) {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>("");
@@ -17,7 +18,7 @@ function useData<T>(
       });
 
     return cancel;
-  }, []);
+  }, [...deps]);
 
   return { data, setData, error, setError };
 }

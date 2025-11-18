@@ -1,7 +1,7 @@
 import type { Game } from "@/model";
 import type { ApiGame } from "../api-types";
-import toGenre from "./toGenre";
-import toPlatform from "./toPlatform";
+import toGenre from "./mapGenre";
+import toPlatform from "./mapPlatform";
 
 export default function toGame(apiGame: ApiGame): Game {
   return {

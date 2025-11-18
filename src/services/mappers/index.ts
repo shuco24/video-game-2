@@ -1,3 +1,3 @@
-export { default as toGame } from "./toGame";
-export { default as toGenre } from "./toGenre";
-export { default as toPlatform } from "./toPlatform";
+export { default as toGame } from "./mapGame";
+export { default as toGenre } from "./mapGenre";
+export { default as toPlatform } from "./mapPlatform";

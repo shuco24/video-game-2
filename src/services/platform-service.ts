@@ -1,6 +1,6 @@
 import type { Platform } from "@/model";
 import { type ApiPlatform } from "./api-types";
-import toPlatform, { toPLatformParent } from "./mappers/toPlatform";
+import toPlatform, { toPLatformParent } from "./mappers/mapPlatform";
 import HttpService from "./http-service";
 import apiClient from "./api-client";
 import type { ApiParentPlatformResponse } from "./api-types/ApiPlatform";
