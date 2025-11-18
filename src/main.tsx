@@ -15,11 +15,9 @@ const config = defineConfig({});
 const system = createSystem(config, defaultConfig);
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ChakraProvider value={system}>
-      <ColorModeProvider defaultTheme="dark">
-        <App />
-      </ColorModeProvider>
-    </ChakraProvider>
-  </StrictMode>
+  <ChakraProvider value={system}>
+    <ColorModeProvider defaultTheme="dark">
+      <App />
+    </ColorModeProvider>
+  </ChakraProvider>
 );

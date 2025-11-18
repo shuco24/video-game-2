@@ -1,4 +1,4 @@
-import apiClient from "./api-client";
+import apiClient, { CanceledError } from "./api-client";
 
 class HttpService<TApi, TDomain> {
   protected readonly _endPoint: string;
@@ -13,7 +13,13 @@ class HttpService<TApi, TDomain> {
     const controller = new AbortController();
     const request = apiClient
       .get<{ results: TApi[] }>(this._endPoint, { signal: controller.signal })
-      .then((res) => res.data.results.map(this._transform));
+      .then((res) => res.data.results.map(this._transform))
+      .catch((err) => {
+        if (err instanceof CanceledError)
+          return Promise.reject({ canceled: true });
+
+        return Promise.reject(err);
+      });
 
     return { request, cancel: () => controller.abort() };
   }
