@@ -2,12 +2,24 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { Provider } from "./components/ui/provider.tsx";
+import {
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+  defineConfig,
+} from "@chakra-ui/react";
+import { ColorModeProvider } from "./components/ui/color-mode.tsx";
+
+const config = defineConfig({});
+
+const system = createSystem(config, defaultConfig);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider>
-      <App />
-    </Provider>
+    <ChakraProvider value={system}>
+      <ColorModeProvider defaultTheme="dark">
+        <App />
+      </ColorModeProvider>
+    </ChakraProvider>
   </StrictMode>
 );

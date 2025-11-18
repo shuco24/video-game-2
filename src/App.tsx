@@ -1,6 +1,5 @@
-import { genreService } from "./services";
-import gameService from "./services/game-service";
-import platformService from "./services/platform-service";
+import useGenres from "./hooks/useGenres";
+import useParentPlatforms from "./hooks/useParentPlatforms";
 
 function App() {
   // const { request: requestGenre, cancel: cancelGenre } = genreService.getAll();
@@ -10,8 +9,8 @@ function App() {
   //   platformService.getAll();
   // requestPlatform.then((res) => console.log(res));
 
-  const { request: request, cancel } = gameService.getAll();
-  request.then((res) => console.log(res));
+  const { data } = useParentPlatforms();
+  console.log(data);
 
   return <div>Hola</div>;
 }
