@@ -1,6 +1,6 @@
 import type { Game } from "@/model";
 import getCroppedImageUrl from "@/utils/image-utils";
-import { Card, HStack, VStack, Image, Text, Box } from "@chakra-ui/react";
+import { Card, HStack, VStack, Image, Text } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import formatDate from "@/utils/date-utils";

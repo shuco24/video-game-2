@@ -1,11 +1,4 @@
-import {
-  Grid,
-  GridItem,
-  Heading,
-  HStack,
-  Input,
-  VStack,
-} from "@chakra-ui/react";
+import { Grid, GridItem, Heading, HStack, VStack } from "@chakra-ui/react";
 import { GameGrid, NavBar, PlatformSelector, SortSelector } from "./components";
 import GenresList from "./components/GenreList";
 import { useState } from "react";

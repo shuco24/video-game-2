@@ -1,7 +1,7 @@
 import useGenres from "@/hooks/useGenres";
 import type { Genre } from "@/model";
 import getCroppedImageUrl from "@/utils/image-utils";
-import { Box, Button, Heading, HStack, Image, Link } from "@chakra-ui/react";
+import { Box, Heading, HStack, Image, Link } from "@chakra-ui/react";
 
 interface Props {
   selectedGenre: Genre | null;

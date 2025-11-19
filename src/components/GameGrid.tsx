@@ -1,8 +1,8 @@
 import useGames from "@/hooks/useGames";
 import type { GameQuery } from "@/store";
-import { Grid, Spinner, Text } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import GameCardWrapper from "./GameCardWrapper";
 import GameCardSkeleton from "./gameCardSkeleton";
 

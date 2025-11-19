@@ -10,6 +10,9 @@ interface Props {
 
 function PlatformSelector({ selectedPlatform, onSelect }: Props) {
   const { data: parentPlatforms, error } = useParentPlatforms();
+
+  if (error) return null;
+
   return (
     <Menu.Root>
       <Menu.Trigger asChild>

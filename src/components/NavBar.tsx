@@ -3,8 +3,6 @@ import logo from "@/assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 
-interface Props {}
-
 function NavBar() {
   return (
     <HStack justify="space-between">
