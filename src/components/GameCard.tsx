@@ -46,6 +46,7 @@ function GameCard({ game }: Props) {
           lineHeight={1.2}
           mt={3}
           mb={2}
+          wordBreak="break-word"
         >
           {game.name}
         </Text>

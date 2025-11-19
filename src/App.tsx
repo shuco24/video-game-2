@@ -22,7 +22,11 @@ function App() {
     >
       {/* HEADER */}
       <GridItem area="header" mb={4}>
-        <NavBar />
+        <NavBar
+          onSearch={(searchText: string) =>
+            setGameQuery({ ...gameQuery, searchText })
+          }
+        />
       </GridItem>
 
       {/* SIDEBAR */}
@@ -45,13 +49,13 @@ function App() {
             <PlatformSelector
               selectedPlatform={gameQuery.parentPlatform}
               onSelect={(parentPlatform) =>
-                setGameQuery({ ...gameQuery, parentPlatform: parentPlatform })
+                setGameQuery({ ...gameQuery, parentPlatform })
               }
             />
             <SortSelector
               selectedSortOrder={gameQuery.sortOrder}
               onSelect={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder: sortOrder })
+                setGameQuery({ ...gameQuery, sortOrder })
               }
             />
           </HStack>

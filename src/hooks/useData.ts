@@ -22,7 +22,6 @@ function useData<T>(
       });
 
     return () => {
-      console.log("chao");
       setIsLoading(true);
       cancel();
     };

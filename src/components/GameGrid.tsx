@@ -16,6 +16,7 @@ function GameGrid({ gameQuery }: Props) {
 
   useEffect(() => {
     const updateHeights = () => {
+      console.log("Cambiados los juegos");
       const wrappers = document.querySelectorAll("[data-card-wrapper]");
 
       wrappers.forEach((wrapper) => {
@@ -27,6 +28,11 @@ function GameGrid({ gameQuery }: Props) {
     };
 
     setTimeout(updateHeights, 50);
+    setTimeout(updateHeights, 100);
+    setTimeout(updateHeights, 200);
+    setTimeout(updateHeights, 400);
+    setTimeout(updateHeights, 1000);
+    setTimeout(updateHeights, 2000);
     window.addEventListener("resize", updateHeights);
 
     return () => window.removeEventListener("resize", updateHeights);
