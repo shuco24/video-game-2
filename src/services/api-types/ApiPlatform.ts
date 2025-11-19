@@ -12,6 +12,7 @@ export interface ApiPlatformResponse {
 export interface ApiParentPlatform {
   id: number;
   name: string;
+  slug: string;
 }
 
 export interface ApiParentPlatformResponse {

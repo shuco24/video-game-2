@@ -1,13 +1,13 @@
 import type { Platform } from "@/model";
 import { type ApiPlatform } from "./api-types";
-import toPlatform, { toPLatformParent } from "./mappers/mapPlatform";
+import mapPlatform, { mapParentPlatform } from "./mappers/mapPlatform";
 import HttpService from "./http-service";
 import apiClient from "./api-client";
 import type { ApiParentPlatformResponse } from "./api-types/ApiPlatform";
 
 class PlatformService extends HttpService<ApiPlatform, Platform> {
   constructor() {
-    super("/platforms", toPlatform);
+    super("/platforms", mapPlatform);
   }
 
   getParents() {
@@ -18,7 +18,7 @@ class PlatformService extends HttpService<ApiPlatform, Platform> {
       })
       .then((res) =>
         res.data.results.map((apiParentPlatform) =>
-          toPLatformParent(apiParentPlatform)
+          mapParentPlatform(apiParentPlatform)
         )
       );
     return { request, cancel: () => controller.abort() };

@@ -1,20 +1,23 @@
 import type { Game } from "@/model";
 import type { ApiGame } from "../api-types";
-import toGenre from "./mapGenre";
-import toPlatform from "./mapPlatform";
+import mapGenre from "./mapGenre";
+import mapPlatform, { mapParentPlatform } from "./mapPlatform";
 
-export default function toGame(apiGame: ApiGame): Game {
+export default function mapGame(apiGame: ApiGame): Game {
   return {
     id: apiGame.id,
-    name: apiGame.name,
     emoji: apiGame.emoji,
     image: apiGame.background_image,
+    name: apiGame.name,
+    released: new Date(apiGame.released),
     score: apiGame.metacritic,
     slug: apiGame.slug,
-    genres: apiGame.genres?.map(toGenre),
-    parentPlatforms: apiGame.parent_platforms,
+    genres: apiGame.genres?.map(mapGenre),
+    parentPlatforms: apiGame.parent_platforms?.map((gameParentPlatform) =>
+      mapParentPlatform(gameParentPlatform.platform)
+    ),
     platforms: apiGame.platforms?.map((gamePlatform) =>
-      toPlatform(gamePlatform.platform)
+      mapPlatform(gamePlatform.platform)
     ),
   };
 }

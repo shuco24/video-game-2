@@ -11,13 +11,14 @@ class HttpService<TApi, TDomain> {
 
   getAll(queryParameters?: any) {
     const controller = new AbortController();
-    const a: boolean = false;
     const request = apiClient
       .get<{ results: TApi[] }>(this._endPoint, {
         signal: controller.signal,
         ...(queryParameters && { params: queryParameters }),
       })
-      .then((res) => res.data.results.map(this._transform))
+      .then((res) => {
+        return res.data.results.map(this._transform);
+      })
       .catch((err) => {
         if (err instanceof CanceledError)
           return Promise.reject({ canceled: true });

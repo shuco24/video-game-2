@@ -4,9 +4,9 @@ import { BsSearch } from "react-icons/bs";
 function SearchInput() {
   return (
     <Box
-      position="relative"
       flex="1"
       mx={4}
+      position="relative"
       role="group"
       css={{
         "&:hover .search-icon": {
@@ -20,6 +20,10 @@ function SearchInput() {
       }}
     >
       <Input
+        bg={{
+          _light: "gray.100",
+          _dark: "gray.900",
+        }}
         pl="32px"
         borderRadius={20}
         placeholder="Search games..."

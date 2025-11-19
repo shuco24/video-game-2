@@ -1,4 +1,3 @@
-import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 
 function useData<T>(
@@ -7,20 +6,29 @@ function useData<T>(
 ) {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const { request: request, cancel } = getData();
     request
-      .then((res) => setData(res))
+      .then((res) => {
+        setData(res);
+        setIsLoading(false);
+      })
       .catch((err) => {
-        console.log("CATCH EN HOOK!!!", err);
         setError(err.message);
+        setIsLoading(false);
       });
 
-    return cancel;
+    return () => {
+      console.log("chao");
+      setIsLoading(true);
+      cancel();
+    };
   }, [...deps]);
 
-  return { data, setData, error, setError };
+  return { data, setData, error, setError, isLoading, setIsLoading };
 }
 
 export default useData;

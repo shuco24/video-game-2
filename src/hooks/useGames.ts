@@ -1,4 +1,7 @@
+import type { GameQuery } from "@/store";
 import useData from "./useData";
-import gameService from "@/services/game-service";
+import { gameService } from "@/services";
+import { mapGameQuery } from "@/services/mappers";
 
-export default () => useData(() => gameService.getAll());
+export default (gameQuery: GameQuery) =>
+  useData(() => gameService.getAll(mapGameQuery(gameQuery)), [gameQuery]);

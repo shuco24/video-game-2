@@ -4,9 +4,10 @@ import type { ParentPlatform } from "./Platform.ts";
 
 export default interface Game {
   id: number;
-  name: string;
   emoji: string;
   image: string;
+  name: string;
+  released: Date;
   score: number;
   slug: string;
   parentPlatforms?: ParentPlatform[];

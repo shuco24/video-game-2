@@ -1,14 +1,38 @@
 import useGames from "@/hooks/useGames";
 import type { GameQuery } from "@/store";
-import { Grid } from "@chakra-ui/react";
+import { Grid, Spinner, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
+import { useEffect, useRef } from "react";
+import GameCardWrapper from "./GameCardWrapper";
+import GameCardSkeleton from "./gameCardSkeleton";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 function GameGrid({ gameQuery }: Props) {
-  const { data: games, error } = useGames();
+  const { data: games, error, isLoading } = useGames(gameQuery);
+  const skeletons = [1, 2, 3, 4, 5, 6];
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const wrappers = document.querySelectorAll("[data-card-wrapper]");
+
+      wrappers.forEach((wrapper) => {
+        const card = wrapper.querySelector("[data-card]") as HTMLElement | null;
+        if (!card) return;
+        const height = card.offsetHeight;
+        wrapper.setAttribute("style", `height: ${height}px !important`);
+      });
+    };
+
+    setTimeout(updateHeights, 50);
+    window.addEventListener("resize", updateHeights);
+
+    return () => window.removeEventListener("resize", updateHeights);
+  }, [games]);
+
+  if (error) return <Text>{error}</Text>;
 
   return (
     <Grid
@@ -19,9 +43,18 @@ function GameGrid({ gameQuery }: Props) {
         xl: "repeat(4, 1fr)",
       }}
       gap={5}
+      w="100%"
     >
+      {isLoading &&
+        skeletons.map((skeleton) => (
+          <GameCardWrapper key={skeleton}>
+            <GameCardSkeleton />
+          </GameCardWrapper>
+        ))}
       {games.map((game) => (
-        <GameCard key={game.id} game={game} />
+        <GameCardWrapper key={game.id}>
+          <GameCard key={game.id} game={game} />
+        </GameCardWrapper>
       ))}
     </Grid>
   );

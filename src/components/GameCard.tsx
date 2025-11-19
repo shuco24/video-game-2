@@ -1,7 +1,10 @@
 import type { Game } from "@/model";
 import getCroppedImageUrl from "@/utils/image-utils";
-import { Badge, Box, HStack, Icon, Image, Text } from "@chakra-ui/react";
-import { HiStar } from "react-icons/hi";
+import { Card, HStack, VStack, Image, Text, Box } from "@chakra-ui/react";
+import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
+import formatDate from "@/utils/date-utils";
+import "@/styles/game-details.css";
 
 interface Props {
   game: Game;
@@ -9,41 +12,57 @@ interface Props {
 
 function GameCard({ game }: Props) {
   return (
-    <Box
+    <Card.Root
+      className="game-card"
+      alignSelf="flex-start"
+      bg={{ _light: "white", _dark: "gray.800" }}
       borderRadius={8}
       borderWidth="1px"
       cursor="pointer"
+      data-card
       overflow="hidden"
       transition="transform 0.2s ease, box-shadow 0.2s ease"
       _hover={{
-        transform: "scale(1.03)",
+        transform: "scale(1.06)",
         boxShadow: "lg",
       }}
     >
       <Image
-        overflow="hidden"
         src={getCroppedImageUrl(game.image)}
         alt={game.slug}
+        contain="cover"
       />
 
-      <Box p="4" spaceY="2">
-        <HStack>
-          <Badge colorPalette="teal" variant="solid">
-            Superhost
-          </Badge>
-          <HStack gap="1" fontWeight="medium">
-            <Icon color="orange.400">
-              <HiStar />
-            </Icon>
-            <Text>{game.score}</Text>
-          </HStack>
+      <Card.Body pb={4}>
+        <HStack justify="space-between">
+          <PlatformIconList parentPlatforms={game.parentPlatforms} />
+          <CriticScore score={game.score} />
         </HStack>
-        <Text fontWeight="medium" color="fg">
+
+        <Text
+          fontSize="3xl"
+          fontWeight="medium"
+          color="fg"
+          lineHeight={1.2}
+          mt={3}
+          mb={2}
+        >
           {game.name}
         </Text>
-        <HStack color="fg.muted">otro • 8 beds</HStack>
-      </Box>
-    </Box>
+
+        <VStack className="game-card-details" gap={0}>
+          <HStack justify="space-between">
+            <Text>Release Date:</Text>
+            <Text>{formatDate(game.released)}</Text>
+          </HStack>
+
+          <HStack justify="space-between">
+            <Text>Genres:</Text>
+            <Text>{game.genres?.map((g) => g.name).join(", ")}</Text>
+          </HStack>
+        </VStack>
+      </Card.Body>
+    </Card.Root>
   );
 }
 

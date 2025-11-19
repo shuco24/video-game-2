@@ -1,7 +1,10 @@
-import type { Platform, PlatformParent } from "@/model";
-import type { ApiPlatform, ApiPlatformParent } from "../api-types";
+import type { Platform, ParentPlatform } from "@/model";
+import type {
+  ApiPlatform,
+  ApiPlatformParent as ApiParentPlatform,
+} from "../api-types";
 
-export default function toPlatform(apiPlatform: ApiPlatform): Platform {
+export default function mapPlatform(apiPlatform: ApiPlatform): Platform {
   return {
     id: apiPlatform.id,
     name: apiPlatform.name,
@@ -10,11 +13,12 @@ export default function toPlatform(apiPlatform: ApiPlatform): Platform {
   };
 }
 
-export function toPLatformParent(
-  apiPlatformParent: ApiPlatformParent
-): PlatformParent {
+export function mapParentPlatform(
+  apiParentPlatform: ApiParentPlatform
+): ParentPlatform {
   return {
-    id: apiPlatformParent.id,
-    name: apiPlatformParent.name,
+    id: apiParentPlatform.id,
+    name: apiParentPlatform.name,
+    slug: apiParentPlatform.slug,
   };
 }

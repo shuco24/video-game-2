@@ -8,4 +8,5 @@ export default interface Platform {
 export interface ParentPlatform {
   id: number;
   name: string;
+  slug: string;
 }

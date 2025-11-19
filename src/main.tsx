@@ -10,7 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { ColorModeProvider } from "./components/ui/color-mode.tsx";
 
-const config = defineConfig({});
+const config = defineConfig({
+  theme: {
+    tokens: {},
+    semanticTokens: {},
+  },
+});
 
 const system = createSystem(config, defaultConfig);
 

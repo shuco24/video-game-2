@@ -1,5 +1,12 @@
-import { Grid, GridItem, Heading, VStack } from "@chakra-ui/react";
-import { GameGrid, NavBar } from "./components";
+import {
+  Grid,
+  GridItem,
+  Heading,
+  HStack,
+  Input,
+  VStack,
+} from "@chakra-ui/react";
+import { GameGrid, NavBar, PlatformSelector, SortSelector } from "./components";
 import GenresList from "./components/GenreList";
 import { useState } from "react";
 import type GameQuery from "./store/GameQuery";
@@ -40,7 +47,21 @@ function App() {
         <VStack align="start">
           <Heading fontSize="4xl" textAlign="left" as="h2">{`${
             gameQuery.genre?.name || ""
-          } ${gameQuery.platform?.name || ""} Games`}</Heading>
+          } ${gameQuery.parentPlatform?.name || ""} Games`}</Heading>
+          <HStack paddingY={3}>
+            <PlatformSelector
+              selectedPlatform={gameQuery.parentPlatform}
+              onSelect={(parentPlatform) =>
+                setGameQuery({ ...gameQuery, parentPlatform: parentPlatform })
+              }
+            />
+            <SortSelector
+              selectedSortOrder={gameQuery.sortOrder}
+              onSelect={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder: sortOrder })
+              }
+            />
+          </HStack>
           <GameGrid gameQuery={gameQuery}></GameGrid>
         </VStack>
       </GridItem>
