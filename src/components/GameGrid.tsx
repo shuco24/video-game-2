@@ -49,7 +49,8 @@ function GameGrid({ gameQuery }: Props) {
         lg: "repeat(3, 1fr)",
         xl: "repeat(4, 1fr)",
       }}
-      gap={5}
+      gap={6}
+      rowGap={10}
       w="100%"
     >
       {isLoading &&
