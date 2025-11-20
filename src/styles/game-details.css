@@ -49,6 +49,7 @@
 .game-card:hover {
   z-index: 1;
   position: absolute;
+  border-width: 1px !important;
 }
 
 .game-card-details > div {

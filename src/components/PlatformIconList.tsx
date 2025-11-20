@@ -36,9 +36,8 @@ const PlatformIconList = ({ parentPlatforms = [] }: Props) => {
   return (
     <HStack marginY={1}>
       {parentPlatforms.map((parentPlatform) => (
-        <Tooltip content={parentPlatform.name}>
+        <Tooltip content={parentPlatform.name} key={parentPlatform.id}>
           <Icon
-            key={parentPlatform.id}
             as={iconMap[parentPlatform.slug] ?? BsQuestionCircle}
             color="gray.500"
           />

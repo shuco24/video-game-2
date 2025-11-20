@@ -16,14 +16,18 @@ function GameGrid({ gameQuery }: Props) {
 
   useEffect(() => {
     const updateHeights = () => {
-      console.log("Cambiados los juegos");
       const wrappers = document.querySelectorAll("[data-card-wrapper]");
 
       wrappers.forEach((wrapper) => {
         const card = wrapper.querySelector("[data-card]") as HTMLElement | null;
         if (!card) return;
-        const height = card.offsetHeight;
-        wrapper.setAttribute("style", `height: ${height}px !important`);
+
+        if (card.matches(":hover")) return;
+
+        wrapper.setAttribute(
+          "style",
+          `height: ${card.offsetHeight}px !important`
+        );
       });
     };
 
