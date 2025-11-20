@@ -27,12 +27,9 @@ function GameGrid({ gameQuery }: Props) {
       });
     };
 
-    setTimeout(updateHeights, 50);
-    setTimeout(updateHeights, 100);
-    setTimeout(updateHeights, 200);
-    setTimeout(updateHeights, 400);
-    setTimeout(updateHeights, 1000);
-    setTimeout(updateHeights, 2000);
+    [50, 100, 200, 400, 1000, 2000].map((time) =>
+      setTimeout(updateHeights, time)
+    );
     window.addEventListener("resize", updateHeights);
 
     return () => window.removeEventListener("resize", updateHeights);

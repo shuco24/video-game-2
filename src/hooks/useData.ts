@@ -17,6 +17,7 @@ function useData<T>(
         setIsLoading(false);
       })
       .catch((err) => {
+        if (err.canceled) return;
         setError(err.message);
         setIsLoading(false);
       });

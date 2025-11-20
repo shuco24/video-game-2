@@ -19,21 +19,27 @@
   transform: scale(1.03);
 }
 
-.game-card-details {
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-}
+@media (min-width: 48em) {
+  /* md */
+  .game-card-details {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
 
-.game-card-wrapper:hover .game-card-details {
-  max-height: 200px;
-  opacity: 1;
+  .game-card-wrapper:hover .game-card-details {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .game-card:hover .game-card-details {
+    max-height: 200px;
+    opacity: 1;
+  }
 }
 
 .game-card-details {
   font-size: 0.7rem;
-  max-height: 0;
-  opacity: 0;
   overflow: hidden;
   width: 100%;
   transition: max-height 0.3s ease, opacity 0.3s ease;
@@ -43,11 +49,6 @@
 .game-card:hover {
   z-index: 1;
   position: absolute;
-}
-
-.game-card:hover .game-card-details {
-  max-height: 200px;
-  opacity: 1;
 }
 
 .game-card-details > div {
