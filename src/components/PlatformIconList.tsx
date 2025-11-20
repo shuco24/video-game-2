@@ -13,6 +13,7 @@ import { BsGlobe } from "react-icons/bs";
 import { HStack, Icon } from "@chakra-ui/react";
 import type { ParentPlatform } from "@/model/Platform";
 import type { IconType } from "react-icons";
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface Props {
   parentPlatforms?: ParentPlatform[];
@@ -35,11 +36,13 @@ const PlatformIconList = ({ parentPlatforms = [] }: Props) => {
   return (
     <HStack marginY={1}>
       {parentPlatforms.map((parentPlatform) => (
-        <Icon
-          key={parentPlatform.id}
-          as={iconMap[parentPlatform.slug] ?? BsQuestionCircle}
-          color="gray.500"
-        />
+        <Tooltip content={parentPlatform.name}>
+          <Icon
+            key={parentPlatform.id}
+            as={iconMap[parentPlatform.slug] ?? BsQuestionCircle}
+            color="gray.500"
+          />
+        </Tooltip>
       ))}
     </HStack>
   );
