@@ -1,6 +1,6 @@
 import useGames from "@/hooks/useGames";
 import type { GameQuery } from "@/store";
-import { Grid, Text } from "@chakra-ui/react";
+import { Button, Grid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import { useEffect } from "react";
 import GameCardWrapper from "./GameCardWrapper";
@@ -11,7 +11,13 @@ interface Props {
 }
 
 function GameGrid({ gameQuery }: Props) {
-  const { data: games, error, isLoading } = useGames(gameQuery);
+  const {
+    data: games,
+    error,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+  } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   useEffect(() => {
@@ -42,29 +48,44 @@ function GameGrid({ gameQuery }: Props) {
   if (error) return <Text>{error.message}</Text>;
 
   return (
-    <Grid
-      templateColumns={{
-        base: "1fr",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
-        xl: "repeat(4, 1fr)",
-      }}
-      gap={6}
-      rowGap={10}
-      w="100%"
-    >
-      {isLoading &&
-        skeletons.map((skeleton) => (
-          <GameCardWrapper key={skeleton}>
-            <GameCardSkeleton />
+    <>
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+          xl: "repeat(4, 1fr)",
+        }}
+        gap={6}
+        rowGap={10}
+        w="100%"
+      >
+        {isLoading &&
+          skeletons.map((skeleton) => (
+            <GameCardWrapper key={skeleton}>
+              <GameCardSkeleton />
+            </GameCardWrapper>
+          ))}
+        {games?.map((game) => (
+          <GameCardWrapper key={game.id}>
+            <GameCard key={game.id} game={game} />
           </GameCardWrapper>
         ))}
-      {games?.map((game) => (
-        <GameCardWrapper key={game.id}>
-          <GameCard key={game.id} game={game} />
-        </GameCardWrapper>
-      ))}
-    </Grid>
+      </Grid>
+
+      <Button
+        bg={{ _light: "white", _dark: "gray.800" }}
+        disabled={isLoading || !hasNextPage}
+        mt={4}
+        onClick={() => fetchNextPage()}
+        variant="surface"
+        _hover={{
+          bg: { _light: "gray.100", _dark: "gray.700" },
+        }}
+      >
+        {isLoading ? "Loading..." : "Load More"}
+      </Button>
+    </>
   );
 }
 
