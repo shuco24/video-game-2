@@ -1,15 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "./api-client";
-
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
+import APIClient from "./api-client";
 
 class HttpService<TApi, TDomain> {
   protected readonly _endPoint;
   protected readonly _transform;
   protected readonly _initialData;
+  protected readonly _apiClient;
 
   constructor(
     endPoint: string,
@@ -19,11 +15,10 @@ class HttpService<TApi, TDomain> {
     this._endPoint = endPoint;
     this._transform = transform;
     this._initialData = initialData;
+    this._apiClient = new APIClient<TApi>(this._endPoint);
   }
 
-  getAll(queryParameters?: any, staleTime?: number) {
-    const controller = new AbortController();
-
+  getAll(queryParameters: any, staleTime?: number) {
     return useQuery<TApi[], Error, TDomain[]>({
       queryKey: [
         ...this._endPoint.split("/").filter(Boolean),
@@ -33,12 +28,7 @@ class HttpService<TApi, TDomain> {
           ? [queryParameters]
           : []),
       ],
-      queryFn: () =>
-        apiClient
-          .get<FetchResponse<TApi>>(this._endPoint, {
-            ...(queryParameters && { params: queryParameters }),
-          })
-          .then((res) => res.data.results),
+      queryFn: () => this._apiClient.getAll({ params: queryParameters }),
       select: (apiData) => apiData.map(this._transform),
       staleTime,
       ...(this._initialData && { placeholderData: this._initialData }),
