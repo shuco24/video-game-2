@@ -11,9 +11,9 @@ import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { HStack, Icon } from "@chakra-ui/react";
-import type { ParentPlatform } from "@/model/Platform";
 import type { IconType } from "react-icons";
 import { Tooltip } from "@/components/ui/tooltip";
+import type { ParentPlatform } from "@/model";
 
 interface Props {
   parentPlatforms?: ParentPlatform[];

@@ -39,7 +39,7 @@ function GameGrid({ gameQuery }: Props) {
     return () => window.removeEventListener("resize", updateHeights);
   }, [games]);
 
-  if (error) return <Text>{error}</Text>;
+  if (error) return <Text>{error.message}</Text>;
 
   return (
     <Grid
@@ -59,7 +59,7 @@ function GameGrid({ gameQuery }: Props) {
             <GameCardSkeleton />
           </GameCardWrapper>
         ))}
-      {games.map((game) => (
+      {games?.map((game) => (
         <GameCardWrapper key={game.id}>
           <GameCard key={game.id} game={game} />
         </GameCardWrapper>

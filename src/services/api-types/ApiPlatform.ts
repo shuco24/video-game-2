@@ -8,13 +8,3 @@ export default interface ApiPlatform {
 export interface ApiPlatformResponse {
   results: ApiPlatform[];
 }
-
-export interface ApiParentPlatform {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-export interface ApiParentPlatformResponse {
-  results: ApiParentPlatform[];
-}

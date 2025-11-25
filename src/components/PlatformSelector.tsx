@@ -24,7 +24,7 @@ function PlatformSelector({ selectedPlatform, onSelect }: Props) {
       <Portal>
         <Menu.Positioner>
           <Menu.Content>
-            {parentPlatforms.map((parentPlatform) => (
+            {parentPlatforms?.map((parentPlatform) => (
               <Menu.Item
                 key={parentPlatform.id}
                 onClick={() => onSelect(parentPlatform)}

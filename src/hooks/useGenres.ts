@@ -1,8 +1,7 @@
-import apiGenres from "@/data/genres";
-import { mapGenre } from "@/services/mappers";
+import { genreService } from "@/services";
 
-export default () => ({
-  data: apiGenres.map((apiGenre) => mapGenre(apiGenre)),
-  error: null,
-  isLoading: false,
-});
+function useGenres() {
+  return genreService.getAll(undefined, 24 * 60 * 60 * 1000);
+}
+
+export default useGenres;

@@ -9,7 +9,7 @@ interface Props {
 }
 
 function GenresList({ selectedGenre, onSelectGenre }: Props) {
-  const { data: genres, error } = useGenres();
+  const { data: genres, error, isLoading } = useGenres();
 
   if (error) return null;
 
@@ -19,7 +19,7 @@ function GenresList({ selectedGenre, onSelectGenre }: Props) {
         Genres
       </Heading>
       <Box as="ul">
-        {genres.map((genre) => (
+        {genres?.map((genre) => (
           <Box as="li" key={genre.id}>
             <HStack mb={3}>
               <Image

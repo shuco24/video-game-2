@@ -4,9 +4,3 @@ export default interface Platform {
   image: string;
   slug: string;
 }
-
-export interface ParentPlatform {
-  id: number;
-  name: string;
-  slug: string;
-}
