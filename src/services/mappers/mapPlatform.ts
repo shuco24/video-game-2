@@ -1,8 +1,6 @@
 import type { Platform, ParentPlatform } from "@/model";
-import type {
-  ApiPlatform,
-  ApiPlatformParent as ApiParentPlatform,
-} from "../api-types";
+import type { ApiPlatform } from "../api-types";
+import type ApiParentPlatform from "../api-types/ApiParentPlatform";
 
 export default function mapPlatform(apiPlatform: ApiPlatform): Platform {
   return {

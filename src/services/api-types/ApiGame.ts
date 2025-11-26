@@ -1,5 +1,5 @@
 import type ApiGenre from "./ApiGenre";
-import type { ApiParentPlatform } from "./ApiParentPlatform";
+import type ApiParentPlatform from "./ApiParentPlatform";
 import type ApiPlatform from "./ApiPlatform";
 
 export default interface ApiGame {
